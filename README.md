@@ -9,6 +9,8 @@ Example uses:
 * Send you a private message containing the last 20 seconds of motion when the door opens
 * Post a GIF to a private slack channel when the door bell is rang
 
+`GET /gif?camera=frontdoor&duration=60&interval=0.25`
+
 ![Screenshot](https://raw.github.com/natm/cctv-gif-buffer/master/docs/demo1.gif)
 
 
