@@ -2,6 +2,7 @@
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/natm/cctv-gif-buffer/master/LICENSE)
 [![Build Status](https://travis-ci.org/natm/cctv-gif-buffer.svg?branch=master)](https://travis-ci.org/natm/cctv-gif-buffer)
+[![Coverage Status](https://coveralls.io/repos/github/natm/cctv-gif-buffer/badge.svg?branch=master)](https://coveralls.io/github/natm/cctv-gif-buffer?branch=master)
 
 Polls IP CCTV cameras every couple of seconds (configurable), stores the last 1 minute in an in-memory ring buffer per camera. Provides a simple HTTP endpoint to retrieve a GIF. This service is designed to be easily integrated with home automation systems.
 
