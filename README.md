@@ -1,8 +1,8 @@
 # CCTV GIF Buffer
 
-Poll IP CCTV cameras every a second, store the last 30 frames in memory per camera.
+Polls IP CCTV cameras every couple of seconds (configurables), stores the last 30 frames in memory per camera. Provides a simple HTTP endpoint to retrieve a GIF. This service is designed to be easily integrated with home automation systems.
 
-HTTP endpoint to retrieve a GIF of the past X seconds, plus future Y seconds. This service is designed to be easily integrated with home automation systems. Example uses:
+Example uses:
 
 * Send you a private message containing the last 20 seconds of motion when the door opens
 * Post a GIF to a private slack channel when the door bell is rang
@@ -13,6 +13,8 @@ HTTP endpoint to retrieve a GIF of the past X seconds, plus future Y seconds. Th
 ## Deployment
 
 ### Quick and easy - Docker!
+
+`x`
 
 ### Dependencies
 
