@@ -1,1 +1,7 @@
-pylama
+coverage==4.2.0
+nose==1.3.7
+nose_parameterized==0.5.0
+pep8==1.7.0
+pylint==1.6.4
+pylama==7.1.0
+autopep8==1.2.4

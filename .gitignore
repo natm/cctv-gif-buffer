@@ -1,5 +1,9 @@
 venv/*
 *.pyc
+cover/
+.coverage
+.coverage.*
+
 test.gif
 test.py
 home.yaml
