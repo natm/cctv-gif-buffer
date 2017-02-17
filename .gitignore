@@ -1,0 +1,5 @@
+venv/*
+*.pyc
+test.gif
+test.py
+home.yaml
