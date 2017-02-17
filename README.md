@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/natm/cctv-gif-buffer.svg?branch=master)](https://travis-ci.org/natm/cctv-gif-buffer)
 
-Polls IP CCTV cameras every couple of seconds (configurable), stores the last 30 frames in memory per camera. Provides a simple HTTP endpoint to retrieve a GIF. This service is designed to be easily integrated with home automation systems.
+Polls IP CCTV cameras every couple of seconds (configurable), stores the last 1 minute in an in-memory ring buffer per camera. Provides a simple HTTP endpoint to retrieve a GIF. This service is designed to be easily integrated with home automation systems.
 
 Example uses:
 
