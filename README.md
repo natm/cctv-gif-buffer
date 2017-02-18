@@ -19,11 +19,24 @@ Example uses:
 
 ## Configuration
 
-buffer.yaml
+Cameras are listed the YAML configuration, the poll interval is specified per camera, optionally HTTP basic authentication can be used.
 
 ```yaml
-
+cameras:
+  frontdoor:
+    url: http://192.168.0.9/ISAPI/Streaming/channels/101/picture
+    interval: 2
+  backdoor:
+    url: http://192.168.0.10/jpg/1/image.jpg
+    interval: 2
+    auth: basic
+    username: admin
+    password: letmein
 ```
+
+## Usage
+
+`./buffer.py -c home.yaml`
 
 ## Deployment
 
