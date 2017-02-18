@@ -21,7 +21,7 @@ Example uses:
 
 ### Quick and easy - Docker!
 
-`x`
+`docker pull natmorris/cctv-gif-buffer:latest`
 
 ### Dependencies
 
