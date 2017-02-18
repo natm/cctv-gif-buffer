@@ -2,7 +2,6 @@
 # Nat Morris (c) 2017
 
 import collections
-import copy
 import imageio
 import logging
 import requests
@@ -11,6 +10,7 @@ import time
 import io
 
 from cctvgifbuffer import version
+from cctvgifbuffer.webserver import WebServer
 from requests.auth import HTTPBasicAuth
 
 LOG = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ class Service(object):
         LOG.info("Initializing service v%s", version())
         self.cameras = {}
         for name, cameracfg in config["cameras"].iteritems():
-            self.cameras[name] = {"config": cameracfg }
+            self.cameras[name] = {"config": cameracfg}
         LOG.info("%d cameras: %s", len(self.cameras), ', '.join(self.cameras.keys()))
         # setup each camera with its own lock and thread
         for name, camera in self.cameras.iteritems():
@@ -48,17 +48,14 @@ class Service(object):
             camera["lock"] = threading.Lock()
             camera["thread"] = threading.Thread(target=camworker, args=(name, camera["config"], camera["buffer"], camera["lock"]))
 
-
     def start(self):
         LOG.info("Starting camera threads")
         # start each camera
         for name, camera in self.cameras.iteritems():
             camera["thread"].start()
 
+        ws = WebServer(service=self)
+        ws.start()
 
         while True:
-#            with lock1:
-#                x = copy.copy(d)
-#            print "writing animation"
-#               imageio.mimsave("test.gif", x, 'GIF', duration=2)
             time.sleep(10)
