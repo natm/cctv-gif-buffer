@@ -4,6 +4,7 @@
 import cctvgifbuffer
 import unittest
 
+
 class TestVersion(unittest.TestCase):
 
     def test_version(self):

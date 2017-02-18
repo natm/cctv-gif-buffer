@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Nat Morris (c) 2017
+"""CCTV GIF buffer - Service."""
 
 import collections
 import imageio
@@ -26,7 +27,7 @@ def camworker(name, config, queue, lock):
             resp = requests.get(config["url"], **respargs)
             if resp.status_code == 200:
                 queue.append(imageio.imread(io.BytesIO(resp.content), format='jpg'))
-            if len(queue) > 5:
+            if len(queue) > 30:
                 queue.popleft()
         time.sleep(2)
 

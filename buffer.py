@@ -6,13 +6,12 @@ import logging
 import os
 import signal
 import sys
-import io
 import yaml
 
 from cctvgifbuffer.service import Service
 
-
 LOG = logging.getLogger(__name__)
+
 
 def main():
 

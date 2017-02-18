@@ -17,6 +17,14 @@ Example uses:
 ![Screenshot](https://raw.github.com/natm/cctv-gif-buffer/master/docs/demo1.gif)
 
 
+## Configuration
+
+buffer.yaml
+
+```yaml
+
+```
+
 ## Deployment
 
 ### Quick and easy - Docker!
