@@ -16,10 +16,9 @@ Example uses:
 
 ![Screenshot](https://raw.github.com/natm/cctv-gif-buffer/master/docs/demo1.gif)
 
-
 ## Configuration
 
-Cameras are listed the YAML configuration, the poll interval is specified per camera, optionally HTTP basic authentication can be used.
+Cameras are listed in YAML configuration file. The poll interval is specified per camera, optionally HTTP basic authentication can be used.
 
 ```yaml
 cameras:
@@ -33,6 +32,14 @@ cameras:
     username: admin
     password: letmein
 ```
+
+Per camera fields:
+
+  * `url`: URL to retrieve a JPEG from the camera from. (required)
+  * `interval`: Time in seconds between polls (required)
+  * `auth`: HTTP authentication type, only `basic` is supported (optional)
+  * `username`: HTTP basic authentication username
+  * `password`: HTTP basic authentication password
 
 ## Usage
 
