@@ -25,7 +25,7 @@ def main():
     # check config exists
     cfgpath = os.path.abspath(args.config)
     if os.path.isfile(cfgpath) is False:
-        LOG.fail("Specified config file does not exist: %s", cfgpath)
+        LOG.fatal("Specified config file does not exist: %s", cfgpath)
         sys.exit(1)
 
     # load the config
@@ -37,7 +37,7 @@ def main():
             sys.exit(1)
 
     if type(config) is not dict:
-        LOG.fail("Invalid YAML config")
+        LOG.fatal("Invalid YAML config")
         sys.exit(1)
 
     svc = Service(config=config)
