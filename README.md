@@ -54,7 +54,10 @@ Per camera fields:
 
 ### Quick and easy - Docker!
 
-`docker pull natmorris/cctv-gif-buffer:latest`
+```
+docker pull natmorris/cctv-gif-buffer:latest
+docker run -d --name cctvgifbuffer --rm -v /etc/cctvgifbuffer:/config -t natmorris/cctv-gif-buffer
+```
 
 ### Dependencies
 
