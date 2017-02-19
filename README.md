@@ -31,6 +31,10 @@ cameras:
     auth: basic
     username: admin
     password: letmein
+server:
+  web:
+    port: 8080
+    listen: 0.0.0.0
 ```
 
 Per camera fields:

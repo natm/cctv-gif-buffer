@@ -5,3 +5,7 @@ cameras:
     auth: basic
     username: admin
     password: abc123
+server:
+  web:
+    port: 8080
+    listen: 0.0.0.0

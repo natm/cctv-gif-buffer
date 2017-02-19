@@ -5,3 +5,7 @@ cameras:
   backdoor:
     url: http://192.168.0.10/jpg/1/image.jpg
     interval: 2
+server:
+  web:
+    port: 8080
+    listen: 0.0.0.0
