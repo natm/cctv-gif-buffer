@@ -39,7 +39,9 @@ class Service(object):
     def __init__(self, config):
         LOG.info("Initializing service v%s", version())
         self.cameras = {}
+        LOG.info("Checking camera configs")
         for name, cameracfg in config["cameras"].iteritems():
+            self.validate_camera_config(name=name, camera=cameracfg)
             self.cameras[name] = {"config": cameracfg}
         LOG.info("%d cameras: %s", len(self.cameras), ', '.join(self.cameras.keys()))
         # setup each camera with its own lock and thread
@@ -60,3 +62,6 @@ class Service(object):
 
         while True:
             time.sleep(10)
+
+    def validate_camera_config(self, name, camera):
+        return

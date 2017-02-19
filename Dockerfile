@@ -29,4 +29,4 @@ RUN rm -rf /var/cache/apk/*
 
 EXPOSE 8080/tcp
 
-CMD ["/env/bin/python", "/app/buffer.py", "-c /etc/cctv-gif-buffer/config.yaml"]
+CMD ["/env/bin/python", "/app/buffer.py", "-c /etc/cctvgifbuffer/config.yaml"]
