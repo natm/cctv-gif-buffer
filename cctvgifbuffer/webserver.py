@@ -43,6 +43,7 @@ class WebServer(object):
         return io.BytesIO(outbytes)
 
     def start(self):
-        cherrypy.server.socket_host = '0.0.0.0'
-        cherrypy.server.socket_port = 8080
+        cherrypy.config.update({'server.socket_port': 8080,
+                                'server.socket_host': '0.0.0.0',
+                                'engine.autoreload.on': False})
         cherrypy.quickstart(self)
