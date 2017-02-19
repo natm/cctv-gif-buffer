@@ -23,7 +23,7 @@ def main():
     args = parser.parse_args()
 
     # check config exists
-    cfgpath = os.path.abspath(args.config)
+    cfgpath = args.config
     if os.path.isfile(cfgpath) is False:
         LOG.fatal("Specified config file does not exist: %s", cfgpath)
         sys.exit(1)
