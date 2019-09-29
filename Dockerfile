@@ -1,13 +1,14 @@
-FROM alpine:3.10.2
+FROM ubuntu:18.04
 MAINTAINER Nat Morris <nat@nuqe.net>
 
-RUN apk add --no-cache --virtual .build-deps g++ python3-dev libffi-dev openssl-dev && \
-    apk add --no-cache --update python3 && \
-    pip3 install --upgrade pip setuptools && \
-    pip3 install virtualenv
+RUN apt-get update && apt-get install -y \
+    python3 \
+    build-essential \
+    python3-setuptools \
+    python-dev \
+    python3-pip
 
-ENV LIBRARY_PATH=/lib:/usr/lib
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+RUN pip3 install virtualenv
 
 # Copy requirements before app so we can cache PIP dependencies on their own
 RUN mkdir /app
