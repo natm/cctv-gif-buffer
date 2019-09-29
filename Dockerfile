@@ -1,14 +1,10 @@
-FROM alpine:3.5
+FROM alpine:3.10.2
 MAINTAINER Nat Morris <nat@nuqe.net>
 
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base \
-    jpeg-dev \
-    zlib-dev \
-  && pip install virtualenv
+RUN apk add --no-cache --virtual .build-deps g++ python3-dev libffi-dev openssl-dev && \
+    apk add --no-cache --update python3 && \
+    pip3 install --upgrade pip setuptools && \
+    pip3 install virtualenv
 
 ENV LIBRARY_PATH=/lib:/usr/lib
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
@@ -17,7 +13,7 @@ RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 RUN mkdir /app
 COPY requirements.txt /app/requirements.txt
 WORKDIR /app
-RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
+RUN virtualenv -p python3 /env && /env/bin/pip3 install -r /app/requirements.txt
 
 COPY buffer.py /app/
 COPY cctvgifbuffer/*.py /app/cctvgifbuffer/
@@ -29,4 +25,4 @@ RUN rm -rf /var/cache/apk/*
 
 EXPOSE 8080/tcp
 
-CMD ["/env/bin/python", "/app/buffer.py", "-c /config/config.yaml"]
+CMD ["/env/bin/python3", "/app/buffer.py", "-c /config/config.yaml"]
