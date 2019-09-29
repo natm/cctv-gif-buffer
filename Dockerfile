@@ -24,6 +24,9 @@ RUN rm -rf \
 	        /tmp/*
 RUN rm -rf /var/cache/apk/*
 
+RUN apt-get autoremove -y; \
+     apt-get autoclean -y
+
 EXPOSE 8080/tcp
 
 CMD ["/env/bin/python3", "/app/buffer.py", "-c /config/config.yaml"]

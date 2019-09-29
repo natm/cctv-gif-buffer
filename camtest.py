@@ -9,6 +9,7 @@ import time
 
 LOG = logging.getLogger(__name__)
 
+
 def version():
     return "2.0.0"
 
