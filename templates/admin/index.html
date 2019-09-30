@@ -1,0 +1,7 @@
+<p>v{{version}}</p>
+<p>{{cameras | length}} cameras</p>
+<ul>
+{% for camera in cameras %}
+    <li><a href="cameras/{{camera.id}}/">{{camera.name}}</a></li>
+{% endfor %}
+</ul>

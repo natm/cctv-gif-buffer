@@ -7,3 +7,5 @@ cherrypy
 opencv-python-headless
 redis
 paho-mqtt
+b2sdk
+boto3

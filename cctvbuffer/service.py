@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Nat Morris (c) 2017
+# Nat Morris (c) 2017, 2019
 """CCTV GIF buffer - Service."""
 
 import collections

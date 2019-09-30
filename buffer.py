@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Nat Morris (c) 2017
+# Nat Morris (c) 2017, 2019
 
 import argparse
 import logging

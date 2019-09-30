@@ -1,8 +1,7 @@
-#!/usr/bin/env python
-# Nat Morris (c) 2017
+#!/usr/bin/env python3
 """CCTV GIF buffer."""
 
-__version__ = "0.0.2"
+__version__ = "2.0.0"
 
 
 def version():
