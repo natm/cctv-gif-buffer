@@ -1,11 +1,10 @@
-# imageio==2.1.2
-# PyYAML==3.12
-# requests==2.13.0
-# CherryPy==10.1.0
-
 cherrypy
 opencv-python-headless
 redis
 paho-mqtt
 b2sdk
 boto3
+rq
+pyyaml
+apscheduler
+imageio
