@@ -15,35 +15,40 @@ class MqttConnector(object):
     def __init__(self, bufferservice):
         self.bufferservice = bufferservice
         self.config = self.bufferservice.config
-        self.mqtt = mqttc.Client()
-        # MQTT event hooks
-        self.mqtt.on_connect = self.mqtt_on_connect
-        self.mqtt.on_message = self.mqtt_on_message
-        self.mqtt.on_subscribe = self.mqtt_on_subscribe
-        self.mqtt_base_topic = self.config["mqtt"]["topic"]
-        # MQTT scheduled publish jobs
-        self.bufferservice.scheduler.add_job(func=self.job_publish_status)
-        self.bufferservice.scheduler.add_job(func=self.job_publish_status, trigger=CronTrigger.from_crontab("* * * * *"))
-        self.bufferservice.scheduler.add_job(func=self.job_publish_cameras)
-        self.bufferservice.scheduler.add_job(func=self.job_publish_cameras, trigger=CronTrigger.from_crontab("* * * * *"))
+        self.enabled = False
+        if "mqtt" in self.config:
+            self.enabled = True
 
+        if self.enabled:
+            self.mqtt = mqttc.Client()
+            # MQTT event hooks
+            self.mqtt.on_connect = self.mqtt_on_connect
+            self.mqtt.on_message = self.mqtt_on_message
+            self.mqtt.on_subscribe = self.mqtt_on_subscribe
+            self.mqtt_base_topic = self.config["mqtt"]["topic"]
+            # MQTT scheduled publish jobs
+            self.bufferservice.scheduler.add_job(func=self.job_publish_status)
+            self.bufferservice.scheduler.add_job(func=self.job_publish_status, trigger=CronTrigger.from_crontab("* * * * *"))
+            self.bufferservice.scheduler.add_job(func=self.job_publish_cameras)
+            self.bufferservice.scheduler.add_job(func=self.job_publish_cameras, trigger=CronTrigger.from_crontab("* * * * *"))
 
     def start(self):
-        LOG.info("MQTT setting up")
-        self.mqtt.username_pw_set(self.config["mqtt"]["user"], self.config["mqtt"]["pass"])
-        LOG.info("MQTT connecting")
-        self.mqtt.connect(self.config["mqtt"]["host"], self.config["mqtt"]["port"], 60)
+        if self.enabled:
+            LOG.info("MQTT setting up")
+            self.mqtt.username_pw_set(self.config["mqtt"]["user"], self.config["mqtt"]["pass"])
+            LOG.info("MQTT connecting")
+            self.mqtt.connect(self.config["mqtt"]["host"], self.config["mqtt"]["port"], 60)
 
-        # Subscribe to interesting MQTT topics
-        topics = [
-            "/snapshot/request/+/now",
-            "/animation/request/+/now"
-        ]
-        for topic_suffix in topics:
-            self.mqtt.subscribe(f"{self.mqtt_base_topic}{topic_suffix}")
+            # Subscribe to interesting MQTT topics
+            topics = [
+                "/snapshot/request/+/now",
+                "/animation/request/+/now"
+            ]
+            for topic_suffix in topics:
+                self.mqtt.subscribe(f"{self.mqtt_base_topic}{topic_suffix}")
 
-        # Start a background thread to maintain the MQTT connection
-        self.mqtt.loop_start()
+            # Start a background thread to maintain the MQTT connection
+            self.mqtt.loop_start()
 
     def mqtt_on_connect(self, client, data, flags, rc):
         LOG.info("MQTT Connected %s", rc)

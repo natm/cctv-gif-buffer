@@ -6,7 +6,3 @@ from cctvbuffer.archive.backends.b2 import B2
 from cctvbuffer.archive.backends.local import Local
 from cctvbuffer.archive.backends.s3 import S3
 
-
-class BackendInterface(object):
-
-    available_backends = [B2, Local, S3]
