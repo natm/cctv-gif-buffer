@@ -4,6 +4,7 @@
 import logging
 import json
 import paho.mqtt.client as mqttc
+from apscheduler.triggers.cron import CronTrigger
 from cctvbuffer import version
 
 LOG = logging.getLogger(__name__)
@@ -20,6 +21,12 @@ class MqttConnector(object):
         self.mqtt.on_message = self.mqtt_on_message
         self.mqtt.on_subscribe = self.mqtt_on_subscribe
         self.mqtt_base_topic = self.config["mqtt"]["topic"]
+        # MQTT scheduled publish jobs
+        self.bufferservice.scheduler.add_job(func=self.job_publish_status)
+        self.bufferservice.scheduler.add_job(func=self.job_publish_status, trigger=CronTrigger.from_crontab("* * * * *"))
+        self.bufferservice.scheduler.add_job(func=self.job_publish_cameras)
+        self.bufferservice.scheduler.add_job(func=self.job_publish_cameras, trigger=CronTrigger.from_crontab("* * * * *"))
+
 
     def start(self):
         LOG.info("MQTT setting up")

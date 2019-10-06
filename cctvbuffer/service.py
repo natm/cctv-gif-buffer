@@ -21,12 +21,8 @@ class BufferService(object):
         self.config = config
         self.cameras = []
         self.tokens = []
-        self.mqtt = MqttConnector(bufferservice=self)
         self.scheduler = BackgroundScheduler()
-        self.scheduler.add_job(func=self.mqtt.job_publish_status)
-        self.scheduler.add_job(func=self.mqtt.job_publish_status, trigger=CronTrigger.from_crontab("* * * * *"))
-        self.scheduler.add_job(func=self.mqtt.job_publish_cameras)
-        self.scheduler.add_job(func=self.mqtt.job_publish_cameras, trigger=CronTrigger.from_crontab("* * * * *"))
+        self.mqtt = MqttConnector(bufferservice=self)
         self.startup = time.time()
         self.webserver = WebServer(bufferservice=self)
 
