@@ -21,11 +21,12 @@ class MqttConnector(object):
 
         if self.enabled:
             self.mqtt = mqttc.Client()
+            self.mqtt_config = self.config["mqtt"]
             # MQTT event hooks
             self.mqtt.on_connect = self.mqtt_on_connect
             self.mqtt.on_message = self.mqtt_on_message
             self.mqtt.on_subscribe = self.mqtt_on_subscribe
-            self.mqtt_base_topic = self.config["mqtt"]["topic"]
+            self.mqtt_base_topic = self.mqtt_config["topic"]
             # MQTT scheduled publish jobs
             self.bufferservice.scheduler.add_job(func=self.job_publish_status)
             self.bufferservice.scheduler.add_job(func=self.job_publish_status, trigger=CronTrigger.from_crontab("* * * * *"))
@@ -34,10 +35,11 @@ class MqttConnector(object):
 
     def start(self):
         if self.enabled:
-            LOG.info("MQTT setting up")
-            self.mqtt.username_pw_set(self.config["mqtt"]["user"], self.config["mqtt"]["pass"])
-            LOG.info("MQTT connecting")
-            self.mqtt.connect(self.config["mqtt"]["host"], self.config["mqtt"]["port"], 60)
+            LOG.info("MQTT Starting")
+            if "user" in self.mqtt_config and "pass" in self.mqtt_config:
+                self.mqtt.username_pw_set(self.mqtt_config["user"], self.mqtt_config["pass"])
+            LOG.info("MQTT Connecting")
+            self.mqtt.connect(self.mqtt_config["host"], self.mqtt_config["port"], 60)
 
             # Subscribe to interesting MQTT topics
             topics = [
