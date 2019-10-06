@@ -47,7 +47,7 @@ class WebAppPublic(object):
             jpg = cv2.imencode('.jpg', frame[0])[1]
             y.append(imageio.imread(io.BytesIO(jpg)))
 
-        outbytes = imageio.mimsave(imageio.RETURN_BYTES, y, 'GIF', fps=1)
+        outbytes = imageio.mimsave(imageio.RETURN_BYTES, y, 'GIF', fps=4)
         cherrypy.response.headers['Content-Type'] = 'image/gif'
         return io.BytesIO(outbytes)
 
@@ -55,9 +55,9 @@ class WebAppPublic(object):
 class WebServer(threading.Thread):
 
     def __init__(self, bufferservice):
+        self.bufferservice = bufferservice
         threading.Thread.__init__(self)
         self.sync = threading.Condition()
-        self.bufferservice = bufferservice
 
     def run(self):
         LOG.info("In run")
