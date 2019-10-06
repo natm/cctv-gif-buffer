@@ -6,6 +6,6 @@ install:
   - pip install -r requirements-test.txt
   - pip install coveralls
 script:
-  - nosetests -sv --with-coverage --cover-package=cctvgifbuffer
+  - nosetests -sv --with-coverage --cover-package=cctvbuffer
 after_success:
   - coveralls
