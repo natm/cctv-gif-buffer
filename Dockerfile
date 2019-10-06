@@ -17,7 +17,7 @@ WORKDIR /app
 RUN virtualenv -p python3 /env && /env/bin/pip3 install -r /app/requirements.txt
 
 COPY buffer.py /app/
-COPY cctvgifbuffer/*.py /app/cctvgifbuffer/
+COPY cctvbuffer/*.py /app/cctvbuffer/
 
 RUN rm -rf \
 	         /root/.cache \
